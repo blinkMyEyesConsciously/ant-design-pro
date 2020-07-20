@@ -2,12 +2,30 @@ export default [
     {
         path: '/user',
         layout: false,
+        component: '@/layouts/UserLayout',
         routes: [
             {
-                name: 'login',
                 path: '/user/login',
-                component: './user/login',
-            },
+                layout: false,
+                component: '@/layouts/LoginLayout',
+                routes:[
+                    {
+                        name: '账号登录',
+                        layout: false,
+
+                        path: '/user/login/LoginAccountAndPassword',
+                        component: './user/LoginAccountAndPassword',
+                    },
+                    {
+                        name: '手机号登录',
+                        layout: false,
+
+                        path: '/user/login/LoginPhoneAndVerification',
+                        component: './user/LoginPhoneAndVerification',
+                    },
+                ]            },
+
+
         ],
     },
 

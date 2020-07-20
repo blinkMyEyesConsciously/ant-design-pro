@@ -8,14 +8,19 @@ export default {
   contentWidth: 'Fluid',
     autoHideHeader: false,
     fixedHeader: false,
-  fixSiderbar: true,
+    fixSiderbar: false,
   colorWeak: false,
-  menu: {
-    locale: true,
+    baseUrl: process.env.NODE_ENV === "development" ? "http://10.0.0.203:8686/freight" : "http://10.0.0.236:7001/freight",
+
+    menu: {
+    locale: false,
   },
+
   title: 'Ant Design Pro',
   pwa: false,
   iconfontUrl: '',
 } as LayoutSettings & {
   pwa: boolean;
+    baseUrl: string;
+
 };
