@@ -1,0 +1,5 @@
+{
+  "originUrl": "http://10.0.0.203:8686/freight/v2/api-docs",
+  "outDir": "./src/api",
+  "templatePath": "./pontTemplate"
+}

@@ -6,7 +6,8 @@ export default {
   primaryColor: '#1890ff',
   layout: 'mix',
   contentWidth: 'Fluid',
-  fixedHeader: false,
+    autoHideHeader: false,
+    fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
   menu: {
