@@ -17,6 +17,7 @@ export default class MyGenerator extends CodeGenerator {
 	}
 
 	getInterfaceContent(inter: Interface) {
+
     /**
      * 生成请求名称
      * */
@@ -54,15 +55,16 @@ export default class MyGenerator extends CodeGenerator {
 		}
 		const method = inter.method.toUpperCase();
     let paramsName=toHump('//'+toHump(inter.path))+'Params'
-    let funName=toHump(inter.path)+method
+    let funName=method.toLowerCase()+toHump('//'+toHump(inter.path))
 
     inter.parameters;
 		return `
-    /**
-     * @desc ${inter.description}
-     */
+  
     import { request } from "umi";
     export ${getParams(paramsName, inter.parameters)}
+      /**
+     * @desc ${inter.description}
+     */
     export async function ${funName} <T>(params:${paramsName},options?:any): Promise<T> {
         // @ts-ignore
         return request("${inter.path}", {

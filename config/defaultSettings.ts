@@ -10,7 +10,7 @@ export default {
     fixedHeader: false,
     fixSiderbar: false,
   colorWeak: false,
-    baseUrl: process.env.NODE_ENV === "development" ? "http://10.0.0.203:8686/freight" : "http://10.0.0.236:7001/freight",
+    baseUrl: process.env.NODE_ENV === "development" ? "http://localhost:8088/api/v1/" : "http://10.0.0.236:7001/freight",
 
     menu: {
     locale: false,

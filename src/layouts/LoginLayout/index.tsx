@@ -15,10 +15,8 @@ const LoginPhoneAndVerification=  '/user/login/LoginPhoneAndVerification'
             centered
             className={styles.tabs}
             defaultActiveKey={location.pathname} >
-            <TabPane tab="账户密码登录" key={LoginAccountAndPassword}>
-            </TabPane>
-            <TabPane tab="手机号登录" key={LoginPhoneAndVerification}>
-            </TabPane>
+            <TabPane tab="账户密码登录" key={ LoginAccountAndPassword }/>
+            <TabPane tab="手机号登录" key={ LoginPhoneAndVerification }/>
         </Tabs>
         {props.children}
     </>
