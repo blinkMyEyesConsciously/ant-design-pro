@@ -10,7 +10,7 @@ export default {
     fixedHeader: false,
     fixSiderbar: false,
   colorWeak: false,
-    baseUrl: process.env.NODE_ENV === "development" ? "http://paydebug.qicp.vip/api/v1" : "http://10.0.0.236:7001/freight",
+    baseUrl: process.env.NODE_ENV === "development" ? "http://paydebug.qicp.vip/api/v1" : "http://paydebug.qicp.vip/api/v1",
 
     menu: {
     locale: false,
