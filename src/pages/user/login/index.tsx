@@ -47,6 +47,7 @@ const replaceGoto = () => {
 };
 
 const Login: React.FC<{}> = () => {
+  // @ts-ignore
   const [userLoginState, setUserLoginState] = useState<API.LoginStateType>({});
   const [submitting, setSubmitting] = useState(false);
 

@@ -1,5 +1,7 @@
 import { parse } from 'querystring';
 import { history } from "umi";
+import moment from "moment";
+import { dataTimeUtilEnum } from './dataTimeUtilEnum';
 
 /* eslint no-useless-escape:0 import/prefer-default-export:0 */
 const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/;
@@ -58,4 +60,46 @@ export  const replaceGoto = () => {
     }
   }
   history.replace(redirect || "/");
+};
+
+// moment转字符串
+export const momentToString = <T>(obj: any, option: any = {}): T => {
+  // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle
+  const _obj = {};
+  Object.keys(obj).forEach((i: string) => {
+    if (moment.isMoment(obj[i])) {
+      if (option.hasOwnProperty(i)) {
+        _obj[i] = obj[i].format(option[i]);
+      } else {
+        _obj[i] = obj[i].format(dataTimeUtilEnum.YYYYMMDD);
+      }
+    } else {
+      _obj[i] = obj[i];
+    }
+  });
+
+  // @ts-ignore
+  return _obj;
+};
+
+interface RequestData<T> {
+  data: T[];
+  success: boolean;
+  total: number;
+}
+
+export const pageTransition = async <T>(fun: (objs: any) => Promise<any>, obj: any) => {
+  // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle
+  const _obj = { ...obj };
+  _obj.pageNum = _obj.current;
+  delete _obj.current;
+  delete _obj.sorter;
+  const data :defs.Laypage=  await fun(_obj);
+  // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle
+  const _data: RequestData<T> = { data: [], success: true, total: 0 };
+  _data.total =data?.count ?? 0;
+  _data.data =data?.data ?? [];
+  _data.success = true;
+  console.log(_data,data,'dataaaaa')
+  return _data;
 };

@@ -17,7 +17,7 @@ const LoginAccountAndPassword: React.FC<{}> = () => {
 
   const { run, loading } = useRequest<PostLoginData> (postLogin, {
     manual: true, onSuccess: (msg) => {
-
+      // 登录成功后写入token
       localStorage.setItem ('Authorization', msg?.token ?? '');
       setTimeout (refresh, 0);
       replaceGoto ();

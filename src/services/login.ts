@@ -9,6 +9,7 @@ export interface LoginParamsType {
 }
 
 export async function fakeAccountLogin(params: LoginParamsType) {
+  // @ts-ignore
   return request<API.LoginStateType>('/api/login/account', {
     method: 'POST',
     data: params,

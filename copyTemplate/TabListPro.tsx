@@ -3,10 +3,11 @@ import { Button, Divider } from "antd";
 import React, { useRef } from "react";
 import { PageContainer } from "@ant-design/pro-layout";
 import ProTable, { ActionType, ProColumns } from "@ant-design/pro-table";
-// import { TableListItem } from "./data.d";
-interface TableListItem {}
 import { orderSourceGetListForSource } from "@/api/mods/orderSource/orderList";
 import { pageTransition } from "@/utils/utils";
+import { getUserPageList } from '@/api/mods/user/findList';
+// import { TableListItem } from "./data.d";
+interface TableListItem {}
 
 const TableList: React.FC<{}> = () => {
 	const actionRef = useRef<ActionType>();
@@ -94,7 +95,7 @@ const TableList: React.FC<{}> = () => {
 					</Button>,
 				]}
 				request={(params) => {
-					return pageTransition<TableListItem>(orderSourceGetListForSource, params);
+					return pageTransition<TableListItem>(getUserPageList, params);
 				}}
 				columns={columns}
 			/>

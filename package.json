@@ -41,8 +41,7 @@
     "pontLs": "rimraf ./src/api && pont ls"
   },
   "husky": {
-    "hooks": {
-    }
+    "hooks": {}
   },
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
@@ -57,7 +56,6 @@
     "not ie <= 10"
   ],
   "dependencies": {
-    "react-helmet-async": "^1.0.4",
     "@ant-design/charts": "^0.9.6",
     "@ant-design/icons": "^4.0.0",
     "@ant-design/pro-layout": "^6.2.4",
@@ -74,14 +72,14 @@
     "qs": "^6.9.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-helmet-async": "^1.0.4",
     "react-zmage": "^0.8.5-beta.36",
     "rimraf": "^3.0.2",
+    "umi": "^3.2.0",
     "umi-request": "^1.0.8",
-    "use-merge-value": "^1.0.1",
-    "umi": "^3.2.0"
+    "use-merge-value": "^1.0.1"
   },
   "devDependencies": {
-    "enzyme": "^3.11.0",
     "@ant-design/pro-cli": "^2.0.2",
     "@types/classnames": "^2.2.7",
     "@types/express": "^4.17.0",
@@ -103,6 +101,7 @@
     "cross-env": "^7.0.0",
     "cross-port-killer": "^1.1.1",
     "detect-installer": "^1.0.1",
+    "enzyme": "^3.11.0",
     "eslint": "^7.2.0",
     "eslint-plugin-react-hooks": "^4.0.5",
     "express": "^4.17.1",

@@ -1,6 +1,6 @@
 import React from 'react';
 import { BasicLayoutProps, Settings as LayoutSettings } from '@ant-design/pro-layout';
-import { notification } from 'antd';
+import { message} from 'antd';
 import { history, RequestConfig } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
@@ -14,15 +14,15 @@ export async function getInitialState (): Promise<{
   settings?: LayoutSettings;
 }> {
   // 如果是登录页面，不执行
-  if (history.location.pathname.indexOf("/user/login")<0) {
+  if (history.location.pathname.indexOf("/user/login")<150) {
     try {
-      const currentUser = await getUserCurrentUser<any>() ;
+      const currentUser = await getUserCurrentUser<any>({}) ;
       return {
         currentUser,
         settings: defaultSettings,
       };
     } catch (error) {
-      history.push ('/user/login/LoginAccountAndPassword');
+      console.log('错误')
     }
   }
   return {
@@ -40,51 +40,29 @@ export const layout = ({
     disableContentMargin: false,
     footerRender: () => <Footer/>,
     menuHeaderRender: undefined,
+    // 后台请求路由
+    // menuDataRender:()=>{return [] },
     ...initialState?.settings,
   };
 };
 
-const codeMessage = {
-  200: '服务器成功返回请求的数据。',
-  201: '新建或修改数据成功。',
-  202: '一个请求已经进入后台排队（异步任务）。',
-  204: '删除数据成功。',
-  400: '发出的请求有错误，服务器没有进行新建或修改数据的操作。',
-  401: '用户没有权限（令牌、用户名、密码错误）。',
-  403: '用户得到授权，但是访问是被禁止的。',
-  404: '发出的请求针对的是不存在的记录，服务器没有进行操作。',
-  405: '请求方法不被允许。',
-  406: '请求的格式不可得。',
-  410: '请求的资源被永久删除，且不会再得到的。',
-  422: '当创建一个对象时，发生一个验证错误。',
-  500: '服务器发生错误，请检查服务器。',
-  502: '网关错误。',
-  503: '服务不可用，服务器暂时过载或维护。',
-  504: '网关超时。',
-};
+
 
 /**
  * 异常处理程序
  */
 
-const errorHandler = (error: { response: Response }) => {
-  const { response } = error;
-  if (response && response.status) {
-    const errorText = codeMessage[response.status] || response.statusText;
-    const { status, url } = response;
+const errorHandler = (error: { response: Response ,code:string,message:string}) => {
+  console.log (error,'error');
 
-    notification.error ({
-      message: `请求错误 ${ status }: ${ url }`,
-      description: errorText,
-    });
-  }
-
-  if (!response) {
-    notification.error ({
-      description: '您的网络发生异常，无法连接服务器',
-      message: '网络异常',
-    });
-  }
+  const { code,message:msg} = error;
+  // 如果是token过期、跳转到登录也
+  if (code==='20000') {
+    history.push ('/user/login/LoginAccountAndPassword');
+  }else if (code==='20002') {
+    message.warn(msg)
+    console.log("手动抛出的业务异常",error)
+  };
   // eslint-disable-next-line @typescript-eslint/no-throw-literal
   throw error;
 };
@@ -92,7 +70,6 @@ const errorHandler = (error: { response: Response }) => {
 const requestInterceptors: RequestInterceptor[] = [
   // 路径参数url的修改
   (url: string, options: RequestOptionsInit) => {
-    console.log (url, options);
     const regex = /\{(.+?)\}/g;
     const strList: any[] = [];
     let result;
@@ -100,6 +77,8 @@ const requestInterceptors: RequestInterceptor[] = [
     while ((result = regex.exec (url)) != null) {
       strList.push (result);
     }
+
+    // 如果是路径参数  则在在请求对象中去除路径参数
     strList.forEach ((item) => {
       // eslint-disable-next-line no-param-reassign
       url = url.replace (item?.[0], options.data[item?.[1]]);
@@ -112,8 +91,11 @@ const requestInterceptors: RequestInterceptor[] = [
   // 添加验证信息
   (url: string, options: RequestOptionsInit) => {
     const optionsParams: any = { ...options };
+    // 判断本地储存里面有没有token；没有token直接跳转登录页面
     if (localStorage.getItem ('Authorization')) {
       optionsParams.headers.Authorization = localStorage.getItem ('Authorization') ?? '';
+    }else {
+      history.push ('/user/login/LoginAccountAndPassword');
     }
     return { url, optionsParams };
   },
@@ -121,18 +103,30 @@ const requestInterceptors: RequestInterceptor[] = [
 
 ];
 
+
 // 响应拦截器
 const responseInterceptors: ResponseInterceptor[] = [
   async (response: Response) => {
-    const json :defs.ResponseModel= await response?.json ();
-    if (json && json.code === "20001" ) {
-      history.push ('/user/login/LoginAccountAndPassword');
+
+  return   new Promise<any>(
+    // eslint-disable-next-line no-async-promise-executor
+    async(resolve,reject)=>{
+      const json :defs.ResponseModel= await response?.json ();
+
+      if (json && json.code === "10000" ) {
+        resolve(json.result);
+      }else {
+        reject(json)
+      }
     }
-    return json.result;
+  )
+    // 如果token 过去直接跳转到首页
+
   },
 ];
 
 export const request: RequestConfig = {
+  // @ts-ignore
   errorHandler,
   prefix: defaultSettings.baseUrl,
   requestInterceptors,
