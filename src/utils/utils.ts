@@ -62,7 +62,12 @@ export  const replaceGoto = () => {
   history.replace(redirect || "/");
 };
 
-// moment转字符串
+/**
+ * moment转字符串
+ * @param obj
+ * @param option 例如:{ksrq:'YYYY-MM-DD'}
+ * @returns {T}
+ */
 export const momentToString = <T>(obj: any, option: any = {}): T => {
   // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle
   const _obj = {};
@@ -82,12 +87,14 @@ export const momentToString = <T>(obj: any, option: any = {}): T => {
   return _obj;
 };
 
-interface RequestData<T> {
+/**
+ * proTable所需要的格式
+ */
+interface ProTableRequestData<T> {
   data: T[];
   success: boolean;
   total: number;
 }
-
 export const pageTransition = async <T>(fun: (objs: any) => Promise<any>, obj: any) => {
   // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle
   const _obj = { ...obj };
@@ -96,10 +103,9 @@ export const pageTransition = async <T>(fun: (objs: any) => Promise<any>, obj: a
   delete _obj.sorter;
   const data :defs.Laypage=  await fun(_obj);
   // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle
-  const _data: RequestData<T> = { data: [], success: true, total: 0 };
+  const _data: ProTableRequestData<T> = { data: [], success: true, total: 0 };
   _data.total =data?.count ?? 0;
   _data.data =data?.data ?? [];
   _data.success = true;
-  console.log(_data,data,'dataaaaa')
   return _data;
 };

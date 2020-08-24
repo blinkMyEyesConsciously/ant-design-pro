@@ -25,9 +25,6 @@ export default defineConfig({
         // 开启紧凑的
         compact: false,
     },
-    dva: {
-        hmr: true,
-    },
 
     layout: {
         navTheme: "light",
@@ -42,12 +39,38 @@ export default defineConfig({
         default: "zh-CN",
         antd: true,
     },
+    // 路由模式
     history: {
         type: "hash",
     },
 
-    inlineLimit: 100000,
-    // 设备大组件不编译
+    // 图片超过小于多少 生成base64
+    inlineLimit: 10000,
+    // 设备大组件单独编译
+    chunks: ["vendors", "umi"],
+    chainWebpack: function (config, { webpack }) {
+        config.merge({
+            optimization: {
+                minimize: true,
+                splitChunks: {
+                    chunks: "all",
+                    minSize: 30000,
+                    minChunks: 3,
+                    automaticNameDelimiter: ".",
+                    cacheGroups: {
+                        vendor: {
+                            name: "vendors",
+                            // @ts-ignore
+                            test({ resource }) {
+                                return /[\\/]node_modules[\\/]/.test(resource);
+                            },
+                            priority: 10,
+                        },
+                    },
+                },
+            },
+        });
+    },
     externals: {
         react: "window.React",
         "react-dom": "window.ReactDOM",
