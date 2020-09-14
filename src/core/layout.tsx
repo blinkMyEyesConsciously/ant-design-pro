@@ -13,7 +13,7 @@ export async function getInitialData (): Promise<{
     settings?: LayoutSettings;
 }> {
     // 如果是登录页面，不执行获取用户信息
-    return ifElse ((int: number) => lt (int) (-10),
+    return ifElse ((int: number) => lt (int) (-1),
         async () => {
             try {
                 const currentUser = await getUserCurrentUser<any> ({});
@@ -32,8 +32,7 @@ export async function getInitialData (): Promise<{
             {
                 settings: defaultSettings,
             }
-        ))
-    (history.location.pathname.indexOf ("/user/login"))
+        )) (history.location.pathname.indexOf ("/user/login"))
 }
 
 

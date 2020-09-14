@@ -57,7 +57,7 @@ export const reqInterceptAddToken = (url: string, options: RequestOptionsInit) =
     if (localStorage.getItem ('Authorization')) {
         optionsParams.headers.Authorization = localStorage.getItem ('Authorization') ?? '';
     } else {
-        history.push ('/user/login/LoginAccountAndPassword');
+        // history.push ('/user/login/LoginAccountAndPassword');
     }
     return {url, optionsParams};
 }

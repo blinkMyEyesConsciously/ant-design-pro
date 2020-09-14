@@ -25,15 +25,11 @@ export default defineConfig({
         // 开启紧凑的
         compact: false,
     },
-
     layout: {
-        navTheme: "light",
-        layout: "mix",
-        name: "网络货运平台",
-        locale: true,
-        siderWidth: 208,
-        fixSiderbar: true,
+        layout :'mix'
     },
+
+
     locale: {
         // default zh-CN
         default: "zh-CN",
@@ -102,6 +98,8 @@ export default defineConfig({
     routes: router,
     // Theme for antd: https://ant.design/docs/react/customize-theme-cn
     theme: {
+        layout: 'mix',
+
         // ...darkTheme,
         "primary-color": defaultSettings.primaryColor,
     },
