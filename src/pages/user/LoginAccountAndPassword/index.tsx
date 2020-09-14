@@ -62,7 +62,7 @@ const LoginAccountAndPassword: React.FC<{}> = () => {
       <Button loading={ loading } type="primary" block htmlType="submit">
         登录
       </Button>
-      OR<a href=""> 注册账号</a>
+      或者<a href=""> 注册账号</a>
     </Form.Item>
   </Form>;
 };

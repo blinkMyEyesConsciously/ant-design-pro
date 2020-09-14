@@ -7,8 +7,8 @@ export default () => (
     copyright="2019 蚂蚁金服体验技术部出品"
     links={[
       {
-        key: 'Ant Design Pro',
-        title: 'Ant Design Pro',
+        key: '诚 驿 Pro',
+        title: '诚 驿 Pro',
         href: 'https://pro.ant.design',
         blankTarget: true,
       },
@@ -19,8 +19,8 @@ export default () => (
         blankTarget: true,
       },
       {
-        key: 'Ant Design',
-        title: 'Ant Design',
+        key: '诚 驿',
+        title: '诚 驿',
         href: 'https://ant.design',
         blankTarget: true,
       },

@@ -46,31 +46,34 @@ export default defineConfig({
 
     // 图片超过小于多少 生成base64
     inlineLimit: 10000,
+    /**
+     * 底下配置 打开后无法生成sourceMap
+     */
     // 设备大组件单独编译
-    chunks: ["vendors", "umi"],
-    chainWebpack: function (config, { webpack }) {
-        config.merge({
-            optimization: {
-                minimize: true,
-                splitChunks: {
-                    chunks: "all",
-                    minSize: 30000,
-                    minChunks: 3,
-                    automaticNameDelimiter: ".",
-                    cacheGroups: {
-                        vendor: {
-                            name: "vendors",
-                            // @ts-ignore
-                            test({ resource }) {
-                                return /[\\/]node_modules[\\/]/.test(resource);
-                            },
-                            priority: 10,
-                        },
-                    },
-                },
-            },
-        });
-    },
+    // chunks: ["vendors", "umi"],
+    // chainWebpack: function (config, { webpack }) {
+    //     config.merge({
+    //         optimization: {
+    //             minimize: true,
+    //             splitChunks: {
+    //                 chunks: "all",
+    //                 minSize: 30000,
+    //                 minChunks: 3,
+    //                 automaticNameDelimiter: ".",
+    //                 cacheGroups: {
+    //                     vendor: {
+    //                         name: "vendors",
+    //                         // @ts-ignore
+    //                         test({ resource }) {
+    //                             return /[\\/]node_modules[\\/]/.test(resource);
+    //                         },
+    //                         priority: 10,
+    //                     },
+    //                 },
+    //             },
+    //         },
+    //     });
+    // },
     externals: {
         react: "window.React",
         "react-dom": "window.ReactDOM",

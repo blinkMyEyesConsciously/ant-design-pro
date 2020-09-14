@@ -5,27 +5,35 @@ import Footer from "@/components/Footer";
 import React from 'react';
 import {history} from "@@/core/history";
 import {getUserCurrentUser} from "@/api/mods/user/getUser";
+import {ifElse, lt,} from "ramda";
 import defaultSettings from "../../config/defaultSettings";
 
 export async function getInitialData (): Promise<{
     currentUser?: any;
     settings?: LayoutSettings;
 }> {
-    // 如果是登录页面，不执行
-    if (history.location.pathname.indexOf ("/user/login") < -10) {
-        try {
-            const currentUser = await getUserCurrentUser<any> ({});
-            return {
-                currentUser,
+    // 如果是登录页面，不执行获取用户信息
+    return ifElse ((int: number) => lt (int) (-10),
+        async () => {
+            try {
+                const currentUser = await getUserCurrentUser<any> ({});
+                return {
+                    currentUser,
+                    settings: defaultSettings,
+                };
+            } catch (error) {
+                console.error ('未知的网络错误', error)
+                return {
+                    settings: defaultSettings,
+                }
+            }
+        },
+        () => (
+            {
                 settings: defaultSettings,
-            };
-        } catch (error) {
-            console.error ('未知的网络错误', error)
-        }
-    }
-    return {
-        settings: defaultSettings,
-    };
+            }
+        ))
+    (history.location.pathname.indexOf ("/user/login"))
 }
 
 
@@ -44,7 +52,7 @@ export const antProLayout = ({
          */
         rightContentRender: (headerViewProps: HeaderViewProps) => {
             console.log (headerViewProps)
-            return <RightContentRender initialState = {initialState}/>;
+            return <RightContentRender initialState={ initialState }/>;
         },
         /**
          * 生成页面底部标签

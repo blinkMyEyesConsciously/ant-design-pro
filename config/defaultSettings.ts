@@ -16,7 +16,7 @@ export default {
     locale: false,
   },
 
-  title: 'Ant Design Pro',
+  title: '诚 驿 Pro',
   pwa: false,
   iconfontUrl: '',
 } as LayoutSettings & {
