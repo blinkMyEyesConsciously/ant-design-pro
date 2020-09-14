@@ -92,7 +92,6 @@
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.8.4",
     "@types/react-helmet": "^6.1.0",
-    "@umijs/plugin-webpack-5": "^0.1.3",
     "@umijs/preset-ant-design-pro": "^1.2.2",
     "@umijs/preset-react": "^1.6.4",
     "carlo": "^0.9.46",

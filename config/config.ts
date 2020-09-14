@@ -4,6 +4,7 @@ import defaultSettings from "./defaultSettings";
 import router from "./router";
 // const { REACT_APP_ENV } = process.env;
 
+
 export default defineConfig({
     //hash模式打包
 
@@ -25,11 +26,15 @@ export default defineConfig({
         // 开启紧凑的
         compact: false,
     },
+
     layout: {
-        layout :'mix'
+        navTheme: "light",
+        layout: "mix",
+        name: "网络货运平台",
+        locale: true,
+        siderWidth: 208,
+        fixSiderbar: true,
     },
-
-
     locale: {
         // default zh-CN
         default: "zh-CN",
