@@ -28,8 +28,8 @@ export default defineConfig({
     },
 
     layout: {
+
         navTheme: "light",
-        layout: "mix",
         name: "网络货运平台",
         locale: true,
         siderWidth: 208,

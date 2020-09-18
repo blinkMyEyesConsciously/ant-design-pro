@@ -5,13 +5,12 @@ export default {
     // 拂晓蓝
     primaryColor: '#1890ff',
     layout: 'mix',
-    splitMenu: true,
+    splitMenus: true,//是否分割菜单栏
     contentWidth: 'Fluid',
     autoHideHeader: false,
     fixedHeader: false,
     fixSiderbar: false,
     colorWeak: false,
-    splitMenus: true,
     baseUrl: process.env.NODE_ENV === "development" ? "http://paydebug.qicp.vip/api/v1" : "http://paydebug.qicp.vip/api/v1",
 
     menu: {
