@@ -6,10 +6,16 @@ export interface UserAdminInfoListParams {
   info?: string;
   /** 第几页 */
   pageIndex?: string;
+  /** pageNum */
+  pageNum?: number;
   /** 每页多少条 */
   pageSize?: string;
+  /** roleId */
+  roleId?: number;
   /** 开始时间 */
   startTime?: number;
+  /** status */
+  status?: number;
 }
 
 /**

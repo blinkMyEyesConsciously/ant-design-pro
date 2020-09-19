@@ -15,40 +15,6 @@ export class Laypage {
   pages = undefined;
 }
 
-export class OrderItem {
-  /** asc */
-  asc = false;
-
-  /** column */
-  column = '';
-}
-
-export class Page {
-  /** current */
-  current = undefined;
-
-  /** hitCount */
-  hitCount = false;
-
-  /** orders */
-  orders = [];
-
-  /** pages */
-  pages = undefined;
-
-  /** records */
-  records = [];
-
-  /** searchCount */
-  searchCount = false;
-
-  /** size */
-  size = undefined;
-
-  /** total */
-  total = undefined;
-}
-
 export class PageInfo {
   /** endRow */
   endRow = undefined;

@@ -39,6 +39,12 @@ export default [
                 icon: 'smile',
                 component: './userList',
             },
+  {
+                path: '/admin/roleList',
+                name: '角色管理',
+                icon: 'smile',
+                component: './roleList',
+            },
 
             {
                 "redirect": "./userList"

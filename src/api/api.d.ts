@@ -20,40 +20,6 @@ declare namespace defs {
     pages?: number;
   }
 
-  export interface OrderItem {
-    /** asc */
-    asc?: boolean;
-
-    /** column */
-    column?: string;
-  }
-
-  export interface Page<T0 = any> {
-    /** current */
-    current?: number;
-
-    /** hitCount */
-    hitCount?: boolean;
-
-    /** orders */
-    orders?: Array<defs.OrderItem>;
-
-    /** pages */
-    pages?: number;
-
-    /** records */
-    records?: Array<T0>;
-
-    /** searchCount */
-    searchCount?: boolean;
-
-    /** size */
-    size?: number;
-
-    /** total */
-    total?: number;
-  }
-
   export interface PageInfo<T0 = any> {
     /** endRow */
     endRow?: number;
@@ -438,17 +404,23 @@ body体参数,不需要Authorization
         info?: string;
         /** 第几页 */
         pageIndex?: string;
+        /** pageNum */
+        pageNum?: number;
         /** 每页多少条 */
         pageSize?: string;
+        /** roleId */
+        roleId?: number;
         /** 开始时间 */
         startTime?: number;
+        /** status */
+        status?: number;
       }
 
-      export type Response = defs.ResponseModel<defs.Page<defs.User>>;
+      export type Response = defs.ResponseModel<defs.Laypage<defs.User>>;
       export const init: Response;
       export function request(
         params: Params,
-      ): Promise<defs.ResponseModel<defs.Page<defs.User>>>;
+      ): Promise<defs.ResponseModel<defs.Laypage<defs.User>>>;
     }
 
     /**
