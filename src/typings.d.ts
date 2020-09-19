@@ -42,3 +42,15 @@ declare const REACT_APP_ENV: 'test' | 'dev' | 'pre' | false;
     settings?: LayoutSettings;
     routers?: any;
 }
+
+
+ interface ResultData<T0 = any> {
+    /** code */
+    code?: string;
+
+    /** message */
+    message?: string;
+
+    /** result */
+    result?: T0;
+}

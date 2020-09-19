@@ -10,7 +10,7 @@ import omit from "omit.js";
 export const errorHandler = (error: { response: Response, code: string, message: string }) => {
     const {code, message: msg} = error;
     // 如果是token过期、跳转到登录也
-    if (code === '20000') {
+    if (code === '20001') {
         history.push ('/user/login/LoginAccountAndPassword');
     } else if (code === '20002') {
         message.warn (msg)
@@ -34,10 +34,11 @@ export const pathParamsEdit = (url: string, options: RequestOptionsInit) => {
     while ((result = regex.exec (url)) != null) {
         strList.push (result);
     }
+    console.log(strList,'strList')
     // 如果是路径参数  则在在请求对象中去除路径参数
     strList.forEach ((item) => {
         // eslint-disable-next-line no-param-reassign
-        url = url.replace (item?.[0], options.data[item?.[1]]);
+        url = url.replace (item?.[0], options.params?.[item?.[1]]);
         // eslint-disable-next-line no-param-reassign
         options.data = omit (options.data, [item?.[1]])
     });
@@ -70,7 +71,7 @@ export const reqInterceptAddToken = (url: string, options: RequestOptionsInit) =
 export const resInterceptParseData = async (response: Response) => {
     // 状态码判断
     return new Promise<any> ((resolve, reject) => {
-            response?.json ().then ((json: defs.ResponseModel) => {
+            response.json ().then ((json: defs.ResponseModel) => {
                 if (json && json.code === "10000") {
                     resolve (json.result);
                 } else {

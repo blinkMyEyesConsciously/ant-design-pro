@@ -5,7 +5,6 @@ import Footer from "@/components/Footer";
 import React from 'react';
 import {history} from "@@/core/history";
 import {getUserCurrentUser} from "@/api/mods/user/getUser";
-import {ifElse, lt,} from "ramda";
 import defaultSettings from "../../config/defaultSettings";
 
 export async function getInitialData (): Promise<{
@@ -13,26 +12,23 @@ export async function getInitialData (): Promise<{
     settings?: LayoutSettings;
 }> {
     // 如果是登录页面，不执行获取用户信息
-    return ifElse ((int: number) => lt (int) (-1),
-        async () => {
-            try {
-                const currentUser = await getUserCurrentUser<any> ({});
-                return {
-                    currentUser,
-                    settings: defaultSettings,
-                };
-            } catch (error) {
-                console.error ('未知的网络错误', error)
-                return {
-                    settings: defaultSettings,
-                }
-            }
-        },
-        () => (
-            {
+    if (history.location.pathname.indexOf ("/user/login")<0) {
+        try {
+            const currentUser = await getUserCurrentUser<ResultData> ({});
+            return {
+                currentUser:currentUser?.result,
+                settings: defaultSettings,
+            };
+        } catch (error) {
+            console.error ('未知的网络错误', error)
+            return {
                 settings: defaultSettings,
             }
-        )) (history.location.pathname.indexOf ("/user/login"))
+        }
+    }else {
+     return    {settings: defaultSettings,}
+
+    }
 }
 
 

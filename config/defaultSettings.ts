@@ -11,7 +11,7 @@ export default {
     fixedHeader: false,
     fixSiderbar: false,
     colorWeak: false,
-    baseUrl: process.env.NODE_ENV === "development" ? "http://paydebug.qicp.vip/api/v1" : "http://paydebug.qicp.vip/api/v1",
+    baseUrl: process.env.NODE_ENV === "development" ? "http://127.0.0.1:8088/api/v1" : "http://paydebug.qicp.vip/api/v1",
 
     menu: {
         locale: false,

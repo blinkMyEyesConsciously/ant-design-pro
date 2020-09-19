@@ -41,12 +41,6 @@ export default [
             },
 
             {
-                path: '/admin/userList2',
-                name: '用户管理',
-                icon: 'smile',
-                component: './userList',
-            },
-            {
                 "redirect": "./userList"
             },
         ],

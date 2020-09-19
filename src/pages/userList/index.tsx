@@ -1,26 +1,34 @@
 import {Divider, Button} from "antd";
-import React, {useRef} from "react";
+import React, { useRef} from "react";
 import {PageContainer} from "@ant-design/pro-layout";
 import ProTable, {ActionType, ProColumns} from "@ant-design/pro-table";
 import {pageTransition} from "@/utils/utils";
 import {getUserPageList} from '@/api/mods/user/findList';
+import {deleteUserByUserNo,} from "@/api/mods/user/deleteUser";
 
 // import { TableListItem } from "./data.d";
 interface TableListItem {
+
 }
 
 
-const Layout = (props:any) => {
-    console.log(props.children,'childre')
+const Layout = (props: any) => {
+    console.log (props.children, 'childre')
     return <div>
         { props.children }
     </div>
 }
 
+const delUser = async (userNo: string,) => {
+    console.log(userNo,'userNo')
+    const data = await deleteUserByUserNo ({userNo})
+    console.log (data);
+}
 
 const UserList: React.FC<{}> = () => {
     const actionRef = useRef<ActionType> ();
-    const columns: ProColumns<TableListItem>[] = [
+
+    const columns: ProColumns<defs.User>[] = [
         {
             title: "手机号",
             dataIndex: "mobile",
@@ -67,7 +75,8 @@ const UserList: React.FC<{}> = () => {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             render: (_, record) => (
                 <>
-                    <Button type='link' onClick={ () => {
+                    <Button type='link' onClick={ async () => {
+                     await   delUser(record.userNo as string)
                     } }>删除</Button>
                     <Divider type="vertical"/>
                     <Button type='link' onClick={ () => {
