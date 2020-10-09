@@ -1,5 +1,8 @@
 {
   "originUrl": "http://localhost:8088/api/v1/v2/api-docs?group=v1",
   "outDir": "./src/api",
-  "templatePath": "./pontTemplate"
+  "templatePath": "./pontTemplate",
+  "mocks": {
+    "enable": false
+  }
 }

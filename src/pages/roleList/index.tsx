@@ -11,8 +11,6 @@ interface TableListItem {
 
 }
 
-
-
 const delUser = async (userNo: string,) => {
     console.log (userNo, 'userNo')
     const data = await deleteUserByUserNo ({userNo})

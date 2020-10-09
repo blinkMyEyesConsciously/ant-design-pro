@@ -39,11 +39,17 @@ export default [
                 icon: 'smile',
                 component: './userList',
             },
-  {
+              {
                 path: '/admin/roleList',
                 name: '角色管理',
                 icon: 'smile',
                 component: './roleList',
+            },
+            {
+                path: '/admin/menu',
+                name: '菜单管理',
+                icon: 'smile',
+                component: './menu',
             },
 
             {

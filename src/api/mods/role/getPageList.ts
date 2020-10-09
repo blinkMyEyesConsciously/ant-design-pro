@@ -1,7 +1,7 @@
 import { request } from 'umi';
 export interface RolePageListParams {
-  /** pageIndex */
-  pageIndex?: number;
+  /** pageNum */
+  pageNum?: number;
   /** pageSize */
   pageSize?: number;
 }

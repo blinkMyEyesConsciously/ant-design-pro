@@ -3,6 +3,41 @@ type ObjectMap<Key extends string | number | symbol = any, Value = any> = {
 };
 
 declare namespace defs {
+  export interface AdminMenu {
+    /** childMenu */
+    childMenu?: Array<defs.Menu>;
+
+    /** code */
+    code?: string;
+
+    /** icon */
+    icon?: string;
+
+    /** menuCode */
+    menuCode?: string;
+
+    /** menuId */
+    menuId?: number;
+
+    /** menuType */
+    menuType?: number;
+
+    /** name */
+    name?: string;
+
+    /** num */
+    num?: number;
+
+    /** parentId */
+    parentId?: number;
+
+    /** parentName */
+    parentName?: string;
+
+    /** url */
+    url?: string;
+  }
+
   export interface Laypage<T0 = any> {
     /** count */
     count?: number;
@@ -20,66 +55,36 @@ declare namespace defs {
     pages?: number;
   }
 
-  export interface PageInfo<T0 = any> {
-    /** endRow */
-    endRow?: number;
+  export interface Menu {
+    /** childMenu */
+    childMenu?: Array<defs.Menu>;
 
-    /** firstPage */
-    firstPage?: number;
+    /** code */
+    code?: string;
 
-    /** hasNextPage */
-    hasNextPage?: boolean;
+    /** icon */
+    icon?: string;
 
-    /** hasPreviousPage */
-    hasPreviousPage?: boolean;
+    /** menuCode */
+    menuCode?: string;
 
-    /** isFirstPage */
-    isFirstPage?: boolean;
+    /** menuId */
+    menuId?: number;
 
-    /** isLastPage */
-    isLastPage?: boolean;
+    /** menuType */
+    menuType?: number;
 
-    /** lastPage */
-    lastPage?: number;
+    /** name */
+    name?: string;
 
-    /** list */
-    list?: Array<T0>;
+    /** num */
+    num?: number;
 
-    /** navigateFirstPage */
-    navigateFirstPage?: number;
+    /** parentId */
+    parentId?: number;
 
-    /** navigateLastPage */
-    navigateLastPage?: number;
-
-    /** navigatePages */
-    navigatePages?: number;
-
-    /** navigatepageNums */
-    navigatepageNums?: Array<number>;
-
-    /** nextPage */
-    nextPage?: number;
-
-    /** pageNum */
-    pageNum?: number;
-
-    /** pageSize */
-    pageSize?: number;
-
-    /** pages */
-    pages?: number;
-
-    /** prePage */
-    prePage?: number;
-
-    /** size */
-    size?: number;
-
-    /** startRow */
-    startRow?: number;
-
-    /** total */
-    total?: number;
+    /** url */
+    url?: string;
   }
 
   export interface ResponseModel<T0 = any> {
@@ -229,6 +234,112 @@ body体参数,不需要Authorization
   }
 
   /**
+   * Menu Controller
+   */
+  export namespace menu {
+    /**
+     * geMenListPage
+     * /menu
+     */
+    export namespace geMenListPage {
+      export class Params {
+        /** code */
+        code?: string;
+        /** icon */
+        icon?: string;
+        /** menuCode */
+        menuCode?: string;
+        /** menuId */
+        menuId?: number;
+        /** menuType */
+        menuType?: number;
+        /** name */
+        name?: string;
+        /** num */
+        num?: number;
+        /** pageNum */
+        pageNum?: number;
+        /** pageSize */
+        pageSize?: number;
+        /** parentId */
+        parentId?: number;
+        /** url */
+        url?: string;
+      }
+
+      export type Response = defs.ResponseModel<defs.Laypage<defs.AdminMenu>>;
+      export const init: Response;
+      export function request(
+        params: Params,
+      ): Promise<defs.ResponseModel<defs.Laypage<defs.AdminMenu>>>;
+    }
+
+    /**
+     * saveOrUpdateMenu
+     * /menu
+     */
+    export namespace saveOrUpdateMenu {
+      export class Params {
+        /** code */
+        code?: string;
+        /** icon */
+        icon?: string;
+        /** menuCode */
+        menuCode?: string;
+        /** menuId */
+        menuId?: number;
+        /** menuType */
+        menuType?: number;
+        /** name */
+        name?: string;
+        /** num */
+        num?: number;
+        /** parentId */
+        parentId?: number;
+        /** url */
+        url?: string;
+      }
+
+      export type Response = defs.ResponseModel<string>;
+      export const init: Response;
+      export function request(
+        params: Params,
+      ): Promise<defs.ResponseModel<string>>;
+    }
+
+    /**
+     * treeMenuList
+     * /menu/treeMenuList
+     */
+    export namespace treeMenuList {
+      export class Params {}
+
+      export type Response = defs.ResponseModel<Array<defs.Menu>>;
+      export const init: Response;
+      export function request(
+        params: Params,
+      ): Promise<defs.ResponseModel<Array<defs.Menu>>>;
+    }
+
+    /**
+     * deleteById
+     * /menu/{id}
+     */
+    export namespace deleteById {
+      export class Params {
+        /** id */
+        id: string;
+      }
+
+      export type Response = defs.ResponseModel<string>;
+      export const init: Response;
+      export function request(
+        params: Params,
+      ): Promise<defs.ResponseModel<string>>;
+    }
+  }
+
+  /**
    * Role Controller
    */
   export namespace role {
@@ -294,17 +405,17 @@ body体参数,不需要Authorization
      */
     export namespace getPageList {
       export class Params {
-        /** pageIndex */
-        pageIndex?: number;
+        /** pageNum */
+        pageNum?: number;
         /** pageSize */
         pageSize?: number;
       }
 
-      export type Response = defs.ResponseModel<defs.PageInfo<defs.Role>>;
+      export type Response = defs.ResponseModel<defs.Laypage<defs.Role>>;
       export const init: Response;
       export function request(
         params: Params,
-      ): Promise<defs.ResponseModel<defs.PageInfo<defs.Role>>>;
+      ): Promise<defs.ResponseModel<defs.Laypage<defs.Role>>>;
     }
 
     /**

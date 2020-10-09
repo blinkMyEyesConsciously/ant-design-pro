@@ -24,7 +24,7 @@ export default defineConfig({
 
     antd: {
         // 开启紧凑的
-        compact: false,
+        compact: true,
     },
 
     layout: {

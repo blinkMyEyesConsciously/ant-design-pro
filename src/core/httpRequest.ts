@@ -71,9 +71,9 @@ export const reqInterceptAddToken = (url: string, options: RequestOptionsInit) =
 export const resInterceptParseData = async (response: Response) => {
     // 状态码判断
     return new Promise<any> ((resolve, reject) => {
-            response.json ().then ((json: defs.ResponseModel) => {
+            response.json ().then ((json: ResultData) => {
                 if (json && json.code === "10000") {
-                    resolve (json.result);
+                    resolve (json.result?json.result:{});
                 } else {
                     reject (json)
                 }

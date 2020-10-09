@@ -1,3 +1,38 @@
+export class AdminMenu {
+  /** childMenu */
+  childMenu = [];
+
+  /** code */
+  code = '';
+
+  /** icon */
+  icon = '';
+
+  /** menuCode */
+  menuCode = '';
+
+  /** menuId */
+  menuId = undefined;
+
+  /** menuType */
+  menuType = undefined;
+
+  /** name */
+  name = '';
+
+  /** num */
+  num = undefined;
+
+  /** parentId */
+  parentId = undefined;
+
+  /** parentName */
+  parentName = '';
+
+  /** url */
+  url = '';
+}
+
 export class Laypage {
   /** count */
   count = undefined;
@@ -15,66 +50,36 @@ export class Laypage {
   pages = undefined;
 }
 
-export class PageInfo {
-  /** endRow */
-  endRow = undefined;
+export class Menu {
+  /** childMenu */
+  childMenu = [];
 
-  /** firstPage */
-  firstPage = undefined;
+  /** code */
+  code = '';
 
-  /** hasNextPage */
-  hasNextPage = false;
+  /** icon */
+  icon = '';
 
-  /** hasPreviousPage */
-  hasPreviousPage = false;
+  /** menuCode */
+  menuCode = '';
 
-  /** isFirstPage */
-  isFirstPage = false;
+  /** menuId */
+  menuId = undefined;
 
-  /** isLastPage */
-  isLastPage = false;
+  /** menuType */
+  menuType = undefined;
 
-  /** lastPage */
-  lastPage = undefined;
+  /** name */
+  name = '';
 
-  /** list */
-  list = [];
+  /** num */
+  num = undefined;
 
-  /** navigateFirstPage */
-  navigateFirstPage = undefined;
+  /** parentId */
+  parentId = undefined;
 
-  /** navigateLastPage */
-  navigateLastPage = undefined;
-
-  /** navigatePages */
-  navigatePages = undefined;
-
-  /** navigatepageNums */
-  navigatepageNums = [];
-
-  /** nextPage */
-  nextPage = undefined;
-
-  /** pageNum */
-  pageNum = undefined;
-
-  /** pageSize */
-  pageSize = undefined;
-
-  /** pages */
-  pages = undefined;
-
-  /** prePage */
-  prePage = undefined;
-
-  /** size */
-  size = undefined;
-
-  /** startRow */
-  startRow = undefined;
-
-  /** total */
-  total = undefined;
+  /** url */
+  url = '';
 }
 
 export class ResponseModel {
