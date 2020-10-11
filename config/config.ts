@@ -23,17 +23,17 @@ export default defineConfig({
     devtool: process.env.NODE_ENV === "development" ? "cheap-module-source-map" : false,
 
     antd: {
-        // 开启紧凑的
-        compact: true,
+
+        // 开启紧凑的 紧凑模式会变小
+        compact: false,
     },
 
     layout: {
 
         navTheme: "light",
-        name: "网络货运平台",
+        name: "网络货运平台1",
         locale: true,
         siderWidth: 208,
-        fixSiderbar: true,
     },
     locale: {
         // default zh-CN
@@ -103,7 +103,6 @@ export default defineConfig({
     routes: router,
     // Theme for antd: https://ant.design/docs/react/customize-theme-cn
     theme: {
-        layout: 'mix',
 
         // ...darkTheme,
         "primary-color": defaultSettings.primaryColor,

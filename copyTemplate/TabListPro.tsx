@@ -16,27 +16,27 @@ const TableList: React.FC<{}> = () => {
 		{
 			title: "订单编号",
 			dataIndex: "orderNum",
-			hideInSearch: true,
+			search: true,
 		},
 
 		{
 			title: "货物名称",
 			dataIndex: "goodsName",
 			hideInForm: true,
-			hideInSearch: true,
+			search: true,
 		},
 		{
 			title: "货物重量(吨)",
 			dataIndex: "goodPrice",
 			hideInForm: true,
-			hideInSearch: true,
+			search: true,
 			renderText: (val: string) => `${val || "--"} 吨`,
 		},
 		{
 			title: "运输单价(元/吨)",
 			dataIndex: "plannedTraffic",
 			hideInForm: true,
-			hideInSearch: true,
+			search: true,
 		},
 		{
 			title: "订单状态",

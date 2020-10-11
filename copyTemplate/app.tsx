@@ -7,7 +7,7 @@ import { history, RequestConfig } from "umi";
 import Footer from "@/components/Footer";
 import RightContentRender from "@/components/RightContentRender";
 import { MenuDataItem } from "@ant-design/pro-layout/lib/typings";
-import { queryCurrent } from "./services/user";
+import { queryCurrent } from "./services/registerAndLogin";
 
 import defaultSettings from "../config/defaultSettings";
 import { API } from "@/services/API";
@@ -21,7 +21,7 @@ export interface InitialState {
 
 export async function getInitialState(): Promise<InitialState> {
 	// 如果是登录页面，不执行
-	if (history.location.pathname !== "/user/login") {
+	if (history.location.pathname !== "/registerAndLogin/login") {
 		try {
 			const currentUser = await queryCurrent();
 			const routers = { a: 1 };
@@ -31,7 +31,7 @@ export async function getInitialState(): Promise<InitialState> {
 				settings: defaultSettings,
 			};
 		} catch (error) {
-			history.replace("/user/login");
+			history.replace("/registerAndLogin/login");
 		}
 	}
 
@@ -131,7 +131,7 @@ const responseInterceptors: ResponseInterceptor[] = [
 	async (response: Response) => {
 		const json = await response?.json();
 		if (json && (json.status === 904 || json.status === 903 || json.status === 901)) {
-			history.replace("/user/login");
+			history.replace("/registerAndLogin/login");
 			setTimeout(() => {
 				notification.warn({
 					description: "您的登录已过期,请重新登录",

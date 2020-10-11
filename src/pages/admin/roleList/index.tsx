@@ -25,13 +25,13 @@ const UserList: React.FC<{}> = () => {
             title: "权限名称",
             dataIndex: "roleName",
             hideInForm: true,
-            hideInSearch: true,
+            search: true,
         },
         {
             title: "roleCode",
             dataIndex: "roleCode",
             hideInForm: true,
-            hideInSearch: true,
+            search: true,
         },
 
         {

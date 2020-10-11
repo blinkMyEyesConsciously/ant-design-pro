@@ -263,6 +263,8 @@ body体参数,不需要Authorization
         pageSize?: number;
         /** parentId */
         parentId?: number;
+        /** selectedKey */
+        selectedKey?: string;
         /** url */
         url?: string;
       }
@@ -308,7 +310,7 @@ body体参数,不需要Authorization
     }
 
     /**
-     * treeMenuList
+     * 配置用户左侧的菜单栏
      * /menu/treeMenuList
      */
     export namespace treeMenuList {

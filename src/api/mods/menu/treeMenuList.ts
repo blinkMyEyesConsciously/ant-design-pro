@@ -2,7 +2,7 @@ import { request } from 'umi';
 export interface MenuTreeMenuListParams {}
 
 /**
- * @desc treeMenuList
+ * @desc 配置用户左侧的菜单栏
  */
 export async function getMenuTreeMenuList<T>(
   params: MenuTreeMenuListParams,

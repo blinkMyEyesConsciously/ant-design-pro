@@ -20,6 +20,8 @@ export interface MenuParams {
   pageSize?: number;
   /** parentId */
   parentId?: number;
+  /** selectedKey */
+  selectedKey?: string;
   /** url */
   url?: string;
 }

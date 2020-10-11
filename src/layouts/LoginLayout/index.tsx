@@ -5,8 +5,8 @@ import { Tabs } from "antd";
 const { TabPane } = Tabs;
 const Basics: React.FC<{}> = (props) => {
     const location = useLocation()
-const LoginAccountAndPassword=  '/user/login/LoginAccountAndPassword'
-const LoginPhoneAndVerification=  '/user/login/LoginPhoneAndVerification'
+const LoginAccountAndPassword=  '/registerAndLogin/login/LoginAccountAndPassword'
+const LoginPhoneAndVerification=  '/registerAndLogin/login/LoginPhoneAndVerification'
     return <>
         <Tabs
             onChange={(key)=>{

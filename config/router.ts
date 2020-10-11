@@ -1,24 +1,24 @@
 export default [
     {
         //登录 注册找回密码页面
-        path: '/user',
+        path: '/registerAndLogin',
         layout: false,
         component: '@/layouts/UserLayout',
         routes: [
             {
-                path: '/user/login',
+                path: '/registerAndLogin/login',
                 component: '@/layouts/LoginLayout',
                 routes: [
                     {
                         name: '账号登录',
-                        path: '/user/login/LoginAccountAndPassword',
-                        component: './user/LoginAccountAndPassword',
+                        path: '/registerAndLogin/login/LoginAccountAndPassword',
+                        component: './registerAndLogin/LoginAccountAndPassword',
                     },
                     {
                         name: '手机号登录',
 
-                        path: '/user/login/LoginPhoneAndVerification',
-                        component: './user/LoginPhoneAndVerification',
+                        path: '/registerAndLogin/login/LoginPhoneAndVerification',
+                        component: './registerAndLogin/LoginPhoneAndVerification',
                     },
                 ],
             },
@@ -37,23 +37,23 @@ export default [
                 path: '/admin/userList',
                 name: '用户管理',
                 icon: 'smile',
-                component: './userList',
+                component: './admin/userList',
             },
               {
                 path: '/admin/roleList',
                 name: '角色管理',
                 icon: 'smile',
-                component: './roleList',
+                component: './admin/roleList',
             },
             {
                 path: '/admin/menu',
                 name: '菜单管理',
                 icon: 'smile',
-                component: './menu',
+                component: './admin/menu',
             },
 
             {
-                "redirect": "./userList"
+                "redirect": "/admin/userList"
             },
         ],
     },

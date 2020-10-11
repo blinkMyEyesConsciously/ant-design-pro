@@ -95,6 +95,7 @@ interface ProTableRequestData<T> {
   success: boolean;
   total: number;
 }
+// obj是protable分页的逻辑逻辑
 export const pageTransition = async <T>(fun: (objs: any) => Promise<any>, obj: any) => {
   // eslint-disable-next-line @typescript-eslint/naming-convention,no-underscore-dangle
   const _obj = { ...obj };

@@ -1,17 +1,18 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Form, Modal, Input, message, TreeSelect} from "antd";
 import {ModalFuncProps} from "antd/lib/modal";
 import {useRequest} from "ahooks";
 import {requiredRules} from "@/utils";
 import {getMenuTreeMenuList} from "@/api/mods/menu/treeMenuList";
 import {DataNode} from "rc-tree-select/lib/interface";
-import { postMenu } from "@/api/mods/menu/saveOrUpdateMenu";
+import {postMenu} from "@/api/mods/menu/saveOrUpdateMenu";
 
 export interface FormProps extends ModalFuncProps {
     show: boolean,
     onCancel: () => void,
-    type:"add"|'edit',
-    menuItem?:MenuEntity
+    onOk: () => void,
+    type: "add" | 'edit',
+    menuItem?: MenuEntity
 }
 
 const formLayout = {
@@ -27,7 +28,7 @@ const menuTreeListDispose = (menuList: any[]): DataNode[] => {
     }))
 }
 
-const AddMenu: React.FC<FormProps> = (props) => {
+const AddOrUpDateMenu: React.FC<FormProps> = (props) => {
     const [form] = Form.useForm ();
 
     const {data: menuTreeList} = useRequest<any[]> (getMenuTreeMenuList);
@@ -35,32 +36,44 @@ const AddMenu: React.FC<FormProps> = (props) => {
     const {loading, run} = useRequest<any> (postMenu, {
         manual: true,
         onSuccess: (data) => {
-            if (data.status === 0) {
-                form.resetFields ();
-                props.onOk && props.onOk ();
-            } else {
-                message.error (data.message);
-            }
+            form.resetFields ();
+            console.log(data)
+            message.success(data)
+            props.onOk && props.onOk ();
+
         },
+        onError:(data)=>{
+            message.error(data.message)  }
     });
+    useEffect (() => {
+        console.log(props.show)
+        if (props.type === 'edit') {
+            if (props.menuItem?.parentId===0) {
+                delete props.menuItem?.parentId
+            }
+            form.setFieldsValue (props.menuItem)
+        }
+
+    }, [props.show])
 
     let onOk = async () => {
         let data: MenuEntity = await form.validateFields ();
         /**
+         *
          * 如果没有选择父级ID,则给他后台配置好的初始值0
          */
         if (!data.parentId) {
             data.parentId = 0
         }
-
-      await  run (data);
+        data.menuType=1
+        await run (props.type==='add'?data:{...data,menuId:props.menuItem?.menuId,});
     };
     let onCancel = () => {
         form.resetFields ();
         props.onCancel && props.onCancel ();
     };
     return (
-        <Modal title={ "添加菜单" } visible={ props.show } { ...props } onOk={ onOk } onCancel={ onCancel }
+        <Modal title={props.type==='add'?"添加菜单":'编辑菜单' } visible={ props.show } { ...props } onOk={ onOk } onCancel={ onCancel }
                confirmLoading={ loading }>
             <Form { ...formLayout } form={ form }>
                 <Form.Item label="菜单名称" name="name" rules={ requiredRules }>
@@ -69,10 +82,10 @@ const AddMenu: React.FC<FormProps> = (props) => {
                 <Form.Item label="URL" name="url" rules={ requiredRules }>
                     <Input/>
                 </Form.Item>
-                <Form.Item label="Icon" name="icon" rules={ requiredRules }>
+                <Form.Item label="Icon" name="icon" >
                     <Input/>
                 </Form.Item>
-                <Form.Item label="Code" name="menuCode" rules={ requiredRules }>
+                <Form.Item label="Code" name="code" >
                     <Input/>
                 </Form.Item>
                 <Form.Item label="序号" name="num" rules={ requiredRules }>
@@ -80,6 +93,7 @@ const AddMenu: React.FC<FormProps> = (props) => {
                 </Form.Item>
                 <Form.Item label="父级菜单" name="parentId">
                     <TreeSelect
+                        allowClear={ true }
                         style={ {width: '100%'} }
                         dropdownStyle={
                             {
@@ -97,4 +111,4 @@ const AddMenu: React.FC<FormProps> = (props) => {
     );
 };
 
-export default AddMenu;
+export default AddOrUpDateMenu;

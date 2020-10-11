@@ -12,7 +12,7 @@ export async function getInitialData (): Promise<{
     settings?: LayoutSettings;
 }> {
     // 如果是登录页面，不执行获取用户信息
-    if (history.location.pathname.indexOf ("/user/login")<0) {
+    if (history.location.pathname.indexOf ("/registerAndLogin/login")<0) {
         try {
             const currentUser = await getUserCurrentUser<ResultData> ({});
             return {
