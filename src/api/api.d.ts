@@ -324,7 +324,7 @@ body体参数,不需要Authorization
     }
 
     /**
-     * deleteById
+     * 根据id删除菜单
      * /menu/{id}
      */
     export namespace deleteById {
@@ -402,6 +402,25 @@ body体参数,不需要Authorization
     }
 
     /**
+     * getByIdByMenuType
+     * /role/byMenuType/{roleCode}
+     */
+    export namespace getByIdByMenuType {
+      export class Params {
+        /** menuType */
+        menuType?: string;
+        /** roleCode */
+        roleCode: string;
+      }
+
+      export type Response = defs.ResponseModel<Array<string>>;
+      export const init: Response;
+      export function request(
+        params: Params,
+      ): Promise<defs.ResponseModel<Array<string>>>;
+    }
+
+    /**
      * getPageList
      * /role/pageList
      */
@@ -445,6 +464,30 @@ body体参数,不需要Authorization
       export class Params {
         /** roleCode */
         roleCode: string;
+      }
+
+      export type Response = defs.ResponseModel<string>;
+      export const init: Response;
+      export function request(
+        params: Params,
+      ): Promise<defs.ResponseModel<string>>;
+    }
+  }
+
+  /**
+   * Role To Menu Controller
+   */
+  export namespace roleToMenu {
+    /**
+     * 根据角色更新权限
+     * /roleToPermission/updateMenuByRoleCode
+     */
+    export namespace updateMenuByRoleCode {
+      export class Params {
+        /** ids */
+        ids?: string;
+        /** roleCode */
+        roleCode?: string;
       }
 
       export type Response = defs.ResponseModel<string>;

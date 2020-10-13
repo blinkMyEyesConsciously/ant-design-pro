@@ -5,7 +5,7 @@ export interface MenuByIdParams {
 }
 
 /**
- * @desc deleteById
+ * @desc 根据id删除菜单
  */
 export async function deleteMenuById<T>(
   params: MenuByIdParams,

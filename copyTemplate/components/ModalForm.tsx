@@ -35,8 +35,8 @@ const AddFormModal: React.FC<FormProps> = (props) => {
 		props.onCancel && props.onCancel();
 	};
 	return (
-		<Modal destroyOnClose title={"操作"} {...props} onOk={onOk} onCancel={onCancel} confirmLoading={loading}>
-			<Form {...formLayout} form={form}>
+		<Modal  destroyOnClose title={"操作"} {...props} onOk={onOk} onCancel={onCancel} confirmLoading={loading}>
+			<Form preserve={false} {...formLayout} form={form}>
 				<Form.Item label="咨询的内容" name="content" rules={[{ required: true, message: "必须填写" }]}>
 					<Input.TextArea />
 				</Form.Item>

@@ -46,7 +46,7 @@ export default defineConfig({
     },
 
     // 图片超过小于多少 生成base64
-    inlineLimit: 10000,
+    inlineLimit: 10001,
     /**
      * 底下配置 打开后无法生成sourceMap
      */

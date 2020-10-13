@@ -31,32 +31,36 @@ const menuTreeListDispose = (menuList: any[]): DataNode[] => {
 const AddOrUpDateMenu: React.FC<FormProps> = (props) => {
     const [form] = Form.useForm ();
 
-    const {data: menuTreeList} = useRequest<any[]> (getMenuTreeMenuList);
+    const {data: menuTreeList, run: menuTreeListRun} = useRequest<any[]> (getMenuTreeMenuList, {manual: true});
+
 
     const {loading, run} = useRequest<any> (postMenu, {
         manual: true,
         onSuccess: (data) => {
-            form.resetFields ();
-            console.log(data)
-            message.success(data)
+            message.success (data)
             props.onOk && props.onOk ();
 
         },
-        onError:(data)=>{
-            message.error(data.message)  }
+        onError: (data) => {
+            message.error (data.message)
+        }
     });
     useEffect (() => {
-        console.log(props.show)
         if (props.type === 'edit') {
-            if (props.menuItem?.parentId===0) {
+            if (props.menuItem?.parentId === 0) {
                 delete props.menuItem?.parentId
             }
+            console.log('插入输入',form )
             form.setFieldsValue (props.menuItem)
         }
-
     }, [props.show])
 
-    let onOk = async () => {
+    useEffect (() => {
+        props.show && menuTreeListRun ()
+    }, [props.show])
+
+
+    const onOk = async () => {
         let data: MenuEntity = await form.validateFields ();
         /**
          *
@@ -65,27 +69,27 @@ const AddOrUpDateMenu: React.FC<FormProps> = (props) => {
         if (!data.parentId) {
             data.parentId = 0
         }
-        data.menuType=1
-        await run (props.type==='add'?data:{...data,menuId:props.menuItem?.menuId,});
+        data.menuType = 1
+        await run (props.type === 'add' ? data : {...data, menuId: props.menuItem?.menuId,});
     };
-    let onCancel = () => {
-        form.resetFields ();
+    const onCancel = () => {
         props.onCancel && props.onCancel ();
     };
     return (
-        <Modal title={props.type==='add'?"添加菜单":'编辑菜单' } visible={ props.show } { ...props } onOk={ onOk } onCancel={ onCancel }
+        <Modal destroyOnClose   title={ props.type === 'add' ? "添加菜单" : '编辑菜单' } visible={ props.show } { ...props } onOk={ onOk }
+               onCancel={ onCancel }
                confirmLoading={ loading }>
-            <Form { ...formLayout } form={ form }>
+            <Form  preserve={false} { ...formLayout } form={ form }>
                 <Form.Item label="菜单名称" name="name" rules={ requiredRules }>
                     <Input/>
                 </Form.Item>
                 <Form.Item label="URL" name="url" rules={ requiredRules }>
                     <Input/>
                 </Form.Item>
-                <Form.Item label="Icon" name="icon" >
+                <Form.Item label="Icon" name="icon">
                     <Input/>
                 </Form.Item>
-                <Form.Item label="Code" name="code" >
+                <Form.Item label="Code" name="code">
                     <Input/>
                 </Form.Item>
                 <Form.Item label="序号" name="num" rules={ requiredRules }>

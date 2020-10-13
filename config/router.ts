@@ -51,6 +51,12 @@ export default [
                 icon: 'smile',
                 component: './admin/menu',
             },
+            {
+                path: '/admin/buttonRole',
+                name: '菜单管理',
+                icon: 'smile',
+                component: './admin/buttonRole',
+            },
 
             {
                 "redirect": "/admin/userList"
@@ -73,7 +79,7 @@ export default [
     },
     {
         path: '/',
-        redirect: '/welcome',
+        redirect: '/admin/userList',
     },
     {
         component: './404',

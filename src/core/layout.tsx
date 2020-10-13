@@ -6,17 +6,36 @@ import React from 'react';
 import {history} from "@@/core/history";
 import {getUserCurrentUser} from "@/api/mods/user/getUser";
 import defaultSettings from "../../config/defaultSettings";
+import { FormOutlined } from "@ant-design/icons";
 
-export async function getInitialData (): Promise<{
+
+export interface InitialState {
     currentUser?: any;
     settings?: LayoutSettings;
-}> {
+    routers?: any;
+}
+
+const loopMenuItem = (menus: MenuDataItem[]): MenuDataItem[] => {
+    return menus?.map(({ icon, name,childMenu,url, ...item }) => ({
+        ...item,
+        name: name,
+        path:url,
+        icon: <FormOutlined />,
+        children: childMenu && loopMenuItem(childMenu),
+    }));
+};
+
+
+export async function getInitialData (): Promise<InitialState> {
     // 如果是登录页面，不执行获取用户信息
     if (history.location.pathname.indexOf ("/registerAndLogin/login")<0) {
         try {
-            const currentUser = await getUserCurrentUser<ResultData> ({});
+            const currentUser = await getUserCurrentUser<any> ({});
+            console.log(currentUser,'currrentUser')
+            console.log(loopMenuItem(currentUser?.menuList),'loopMenuItem(currentUser?.menuList)')
             return {
-                currentUser:currentUser?.result,
+                currentUser:currentUser,
+                routers:loopMenuItem(currentUser.menuList),
                 settings: defaultSettings,
             };
         } catch (error) {
@@ -35,7 +54,7 @@ export async function getInitialData (): Promise<{
 export const antProLayout = ({
                                  initialState,
                              }: {
-    initialState: { settings?: LayoutSettings };
+    initialState:InitialState;
 }): BasicLayoutProps => {
     return {
         /**
@@ -66,7 +85,7 @@ export const antProLayout = ({
          *通过服务器端生成路由
          * */
         menuDataRender: (menuData: MenuDataItem[]) => {
-            return menuData;
+            return initialState.routers;
         },
         ...initialState?.settings,
     };
