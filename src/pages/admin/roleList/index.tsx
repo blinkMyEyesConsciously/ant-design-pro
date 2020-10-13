@@ -7,6 +7,9 @@ import { getRolePageList } from "@/api/mods/role/getPageList";
 import WebMenuRoleEdit from "./components/WebMenuRoleEdit";
 import ButtonRoleEdit from "@/pages/admin/roleList/components/ButtonRoleEdit";
 import { useBoolean } from "ahooks";
+import ButtonSubmit from "@/components/ButtonSubmit";
+import { deleteRoleByRoleCode } from "@/api/mods/role/deleteRole";
+import AddOrUpdateRole from "@/pages/admin/roleList/AddOrUpdateRole";
 
 // import { TableListItem } from "./data.d";
 interface TableListItem {}
@@ -15,6 +18,7 @@ const UserList: React.FC<{}> = () => {
 	const actionRef = useRef<ActionType>();
 	const [roleId, setRoleId] = useState<string>("");
 	const [webMenuRoleEditVisible, setWebMenuRoleEditVisible] = useState<boolean>(false);
+	const [AddOrUpdateRoleVisible, setAddOrUpdateRoleVisible] = useState<boolean>(false);
 	const buttonRoleEditVisible = useBoolean(false);
 	const columns: ProColumns<defs.Role>[] = [
 		{
@@ -38,13 +42,14 @@ const UserList: React.FC<{}> = () => {
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			render: (_, record) => (
 				<>
-					<Button type="link" onClick={async () => {}}>
+					<ButtonSubmit
+						reqFun={deleteRoleByRoleCode}
+						okCallback={() => {
+							actionRef.current?.reload();
+						}}
+						data={{ roleCode: record.roleCode }}>
 						删除
-					</Button>
-					<Divider type="vertical" />
-					<Button type="link" onClick={() => {}}>
-						删除
-					</Button>
+					</ButtonSubmit>
 					<Divider type="vertical" />
 					<Button
 						type="link"
@@ -101,10 +106,31 @@ const UserList: React.FC<{}> = () => {
 					roleId={roleId}
 				/>
 			)}
+			<AddOrUpdateRole
+				onCancel={() => {
+					() => {
+						setAddOrUpdateRoleVisible(false);
+					};
+				}}
+				onOk={() => {
+					setAddOrUpdateRoleVisible(false);
+					actionRef.current?.reload();
+				}}
+				visible={AddOrUpdateRoleVisible}
+			/>
 
 			<ProTable<TableListItem>
 				actionRef={actionRef}
 				rowKey="roleCode"
+				toolBarRender={() => [
+					<Button
+						key={"1"}
+						onClick={() => {
+							setAddOrUpdateRoleVisible(true);
+						}}>
+						添加
+					</Button>,
+				]}
 				request={(params) => {
 					return pageTransition<TableListItem>(getRolePageList, params);
 				}}
