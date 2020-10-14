@@ -7,7 +7,6 @@ import { ConfigProvider } from "antd";
 import zhCN from "antd/es/locale/zh_CN";
 import React from "react";
 import moment from "moment";
-
 import "moment/locale/zh-cn";
 
 /**
@@ -44,11 +43,14 @@ export const request: RequestConfig = {
 	requestInterceptors,
 	responseInterceptors,
 };
+moment.locale("zh-cn");
 
 export function rootContainer(container: any) {
 	moment.locale("zh-cn");
 
 	const root = () => {
+		moment.locale("zh-cn");
+
 		return <ConfigProvider locale={zhCN}>{container}</ConfigProvider>;
 	};
 	return React.createElement(root);

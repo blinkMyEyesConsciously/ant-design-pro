@@ -27,6 +27,13 @@ export default defineConfig({
 		compact: false,
 	},
 
+	locale: {
+		// default zh-CN
+		default: "zh-CN",
+		// default true, when it is true, will use `navigator.language` overwrite default
+		antd: true,
+		baseNavigator: true,
+	},
 	layout: {
 		navTheme: "light",
 		name: "网络货运平台1",
@@ -87,30 +94,30 @@ export default defineConfig({
 		loading: "@/components/PageLoading/index",
 	},
 
-	chunks: ["vendors", "umi"],
-	chainWebpack: function (config, { webpack }) {
-		config.merge({
-			optimization: {
-				minimize: true,
-				splitChunks: {
-					chunks: "all",
-					minSize: 30000,
-					minChunks: 3,
-					automaticNameDelimiter: ".",
-					cacheGroups: {
-						vendor: {
-							name: "vendors",
-							// @ts-ignore
-							test({ resource }) {
-								return /[\\/]node_modules[\\/]/.test(resource);
-							},
-							priority: 10,
-						},
-					},
-				},
-			},
-		});
-	},
+	// chunks: ["vendors", "umi"],
+	// chainWebpack: function (config, { webpack }) {
+	// 	config.merge({
+	// 		optimization: {
+	// 			minimize: true,
+	// 			splitChunks: {
+	// 				chunks: "all",
+	// 				minSize: 30000,
+	// 				minChunks: 3,
+	// 				automaticNameDelimiter: ".",
+	// 				cacheGroups: {
+	// 					vendor: {
+	// 						name: "vendors",
+	// 						// @ts-ignore
+	// 						test({ resource }) {
+	// 							return /[\\/]node_modules[\\/]/.test(resource);
+	// 						},
+	// 						priority: 10,
+	// 					},
+	// 				},
+	// 			},
+	// 		},
+	// 	});
+	// },
 	// targets: {
 	// 	ie: 11,
 	// },

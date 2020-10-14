@@ -18,7 +18,7 @@ export default {
 		locale: false,
 	},
 	name: "网络货运平台",
-	locale: false,
+	locale: true,
 	title: "诚 驿 Pro",
 	pwa: false,
 	iconfontUrl: "",
