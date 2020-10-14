@@ -145,6 +145,9 @@ declare namespace defs {
     /** password */
     password?: string;
 
+    /** roleCode */
+    roleCode?: string;
+
     /** roleName */
     roleName?: string;
 
@@ -222,13 +225,39 @@ body体参数,不需要Authorization
         * /register
         */
     export namespace register {
-      export class Params {}
+      export class Params {
+        /** avatar */
+        avatar?: string;
+        /** captcha */
+        captcha?: string;
+        /** createTime */
+        createTime?: string;
+        /** email */
+        email?: string;
+        /** job */
+        job?: string;
+        /** mobile */
+        mobile?: string;
+        /** password */
+        password?: string;
+        /** rePassword */
+        rePassword?: string;
+        /** roleCode */
+        roleCode?: string;
+        /** roleName */
+        roleName?: string;
+        /** status */
+        status?: number;
+        /** userNo */
+        userNo?: string;
+        /** username */
+        username?: string;
+      }
 
       export type Response = defs.ResponseModel<defs.User>;
       export const init: Response;
       export function request(
         params: Params,
-        bodyParams: String,
       ): Promise<defs.ResponseModel<defs.User>>;
     }
   }
@@ -301,6 +330,20 @@ body体参数,不需要Authorization
         /** url */
         url?: string;
       }
+
+      export type Response = defs.ResponseModel<string>;
+      export const init: Response;
+      export function request(
+        params: Params,
+      ): Promise<defs.ResponseModel<string>>;
+    }
+
+    /**
+     * 生成后台权限菜单
+     * /menu/build
+     */
+    export namespace build {
+      export class Params {}
 
       export type Response = defs.ResponseModel<string>;
       export const init: Response;
@@ -486,6 +529,8 @@ body体参数,不需要Authorization
       export class Params {
         /** ids */
         ids?: string;
+        /** menuType */
+        menuType?: string;
         /** roleCode */
         roleCode?: string;
       }
@@ -565,7 +610,7 @@ body体参数,不需要Authorization
         /** 每页多少条 */
         pageSize?: string;
         /** roleId */
-        roleId?: number;
+        roleId?: string;
         /** 开始时间 */
         startTime?: number;
         /** status */
@@ -612,6 +657,8 @@ body体参数,不需要Authorization
         mobile?: string;
         /** password */
         password?: string;
+        /** roleCode */
+        roleCode?: string;
         /** roleName */
         roleName?: string;
         /** status */
@@ -647,6 +694,8 @@ body体参数,不需要Authorization
         mobile?: string;
         /** password */
         password?: string;
+        /** roleCode */
+        roleCode?: string;
         /** roleName */
         roleName?: string;
         /** status */
@@ -683,6 +732,8 @@ body体参数,不需要Authorization
         mobile?: string;
         /** password */
         password?: string;
+        /** roleCode */
+        roleCode?: string;
         /** roleName */
         roleName?: string;
         /** status */
@@ -723,6 +774,8 @@ body体参数,不需要Authorization
         pageSize?: number;
         /** password */
         password?: string;
+        /** roleCode */
+        roleCode?: string;
         /** roleName */
         roleName?: string;
         /** status */
@@ -758,6 +811,8 @@ body体参数,不需要Authorization
         mobile?: string;
         /** password */
         password?: string;
+        /** roleCode */
+        roleCode?: string;
         /** roleName */
         roleName?: string;
         /** status */
@@ -773,6 +828,44 @@ body体参数,不需要Authorization
       export function request(
         params: Params,
         bodyParams: ObjectMap<any, object>,
+      ): Promise<defs.ResponseModel<string>>;
+    }
+
+    /**
+        * 更新用户的状态
+需要header里加入Authorization
+        * /user/updateStatus
+        */
+    export namespace updateStatus {
+      export class Params {
+        /** avatar */
+        avatar?: string;
+        /** createTime */
+        createTime?: string;
+        /** email */
+        email?: string;
+        /** job */
+        job?: string;
+        /** mobile */
+        mobile?: string;
+        /** password */
+        password?: string;
+        /** roleCode */
+        roleCode?: string;
+        /** roleName */
+        roleName?: string;
+        /** status */
+        status?: number;
+        /** userNo */
+        userNo?: string;
+        /** username */
+        username?: string;
+      }
+
+      export type Response = defs.ResponseModel<string>;
+      export const init: Response;
+      export function request(
+        params: Params,
       ): Promise<defs.ResponseModel<string>>;
     }
 

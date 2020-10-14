@@ -1,5 +1,32 @@
 import { request } from 'umi';
-export interface RegisterParams {}
+export interface RegisterParams {
+  /** avatar */
+  avatar?: string;
+  /** captcha */
+  captcha?: string;
+  /** createTime */
+  createTime?: string;
+  /** email */
+  email?: string;
+  /** job */
+  job?: string;
+  /** mobile */
+  mobile?: string;
+  /** password */
+  password?: string;
+  /** rePassword */
+  rePassword?: string;
+  /** roleCode */
+  roleCode?: string;
+  /** roleName */
+  roleName?: string;
+  /** status */
+  status?: number;
+  /** userNo */
+  userNo?: string;
+  /** username */
+  username?: string;
+}
 
 /**
      * @desc 手机验证码注册

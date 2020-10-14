@@ -1,5 +1,5 @@
 import { request } from 'umi';
-export interface UserPageListParams {
+export interface UserUpdateStatusParams {
   /** avatar */
   avatar?: string;
   /** createTime */
@@ -10,10 +10,6 @@ export interface UserPageListParams {
   job?: string;
   /** mobile */
   mobile?: string;
-  /** pageNum */
-  pageNum?: number;
-  /** pageSize */
-  pageSize?: number;
   /** password */
   password?: string;
   /** roleCode */
@@ -29,17 +25,19 @@ export interface UserPageListParams {
 }
 
 /**
- * @desc findList
- */
-export async function getUserPageList<T>(
-  params: UserPageListParams,
+     * @desc 更新用户的状态
+需要header里加入Authorization
+     */
+export async function postUserUpdateStatus<T>(
+  params: UserUpdateStatusParams,
   options?: any,
 ): Promise<T> {
   // @ts-ignore
-  return request('/user/pageList', {
-    method: 'GET',
-    params: params,
+  return request('/user/updateStatus', {
+    method: 'POST',
+    data: params,
 
+    requestType: 'form',
     ...options,
   });
 }

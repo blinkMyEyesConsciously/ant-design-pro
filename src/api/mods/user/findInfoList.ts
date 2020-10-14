@@ -11,7 +11,7 @@ export interface UserAdminInfoListParams {
   /** 每页多少条 */
   pageSize?: string;
   /** roleId */
-  roleId?: number;
+  roleId?: string;
   /** 开始时间 */
   startTime?: number;
   /** status */

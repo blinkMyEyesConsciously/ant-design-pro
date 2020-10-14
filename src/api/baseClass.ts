@@ -140,6 +140,9 @@ export class User {
   /** password */
   password = '';
 
+  /** roleCode */
+  roleCode = '';
+
   /** roleName */
   roleName = '';
 

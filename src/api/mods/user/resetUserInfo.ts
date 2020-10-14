@@ -12,6 +12,8 @@ export interface UserInfoParams {
   mobile?: string;
   /** password */
   password?: string;
+  /** roleCode */
+  roleCode?: string;
   /** roleName */
   roleName?: string;
   /** status */

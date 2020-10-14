@@ -8,6 +8,7 @@ import * as resetUserInfo from './resetUserInfo';
 import * as resetMobile from './resetMobile';
 import * as findList from './findList';
 import * as postPassword from './postPassword';
+import * as updateStatus from './updateStatus';
 import * as findOneUser from './findOneUser';
 import * as deleteUser from './deleteUser';
 
@@ -19,6 +20,7 @@ export {
   resetMobile,
   findList,
   postPassword,
+  updateStatus,
   findOneUser,
   deleteUser,
 };

@@ -2,6 +2,8 @@ import { request } from 'umi';
 export interface RoleToPermissionUpdateMenuByRoleCodeParams {
   /** ids */
   ids?: string;
+  /** menuType */
+  menuType?: string;
   /** roleCode */
   roleCode?: string;
 }
