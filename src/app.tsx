@@ -53,9 +53,3 @@ export function rootContainer(container: any) {
 	};
 	return React.createElement(root);
 }
-
-export const antd = {
-	config: {
-		locale: zhCN, // 引用antd的语言包
-	},
-};

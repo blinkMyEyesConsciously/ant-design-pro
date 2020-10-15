@@ -8,7 +8,6 @@ export default {
 	splitMenus: true, //是否分割菜单栏
 	contentWidth: "Fluid",
 	autoHideHeader: false,
-
 	fixedHeader: false,
 	fixSiderbar: false,
 	colorWeak: false,
@@ -18,7 +17,7 @@ export default {
 		locale: false,
 	},
 	name: "网络货运平台",
-	locale: false,
+	locale: true,
 	title: "诚 驿 Pro",
 	pwa: false,
 	iconfontUrl: "",

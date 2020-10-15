@@ -22,7 +22,6 @@ export default defineConfig({
 	devtool: process.env.NODE_ENV === "development" ? "cheap-module-source-map" : false,
 
 	antd: {
-		config: {},
 		// 开启紧凑的 紧凑模式会变小
 		compact: false,
 	},
@@ -44,50 +43,6 @@ export default defineConfig({
 	 */
 	// 设备大组件单独编译
 	// chunks: ["vendors", "umi"],
-	// chainWebpack: function (config, { webpack }) {
-	//     config.merge({
-	//         optimization: {
-	//             minimize: true,
-	//             splitChunks: {
-	//                 chunks: "all",
-	//                 minSize: 30000,
-	//                 minChunks: 3,
-	//                 automaticNameDelimiter: ".",
-	//                 cacheGroups: {
-	//                     vendor: {
-	//                         name: "vendors",
-	//                         // @ts-ignore
-	//                         test({ resource }) {
-	//                             return /[\\/]node_modules[\\/]/.test(resource);
-	//                         },
-	//                         priority: 10,
-	//                     },
-	//                 },
-	//             },
-	//         },
-	//     });
-	// },
-	externals: {
-		react: "window.React",
-		"react-dom": "window.ReactDOM",
-	},
-	// 引入被 external 库的 scripts
-	// 区分 development 和 production，使用不同的产物
-	scripts:
-		process.env.NODE_ENV === "development"
-			? [
-					"https://gw.alipayobjects.com/os/lib/react/16.13.1/umd/react.development.js",
-					"https://gw.alipayobjects.com/os/lib/react-dom/16.13.1/umd/react-dom.development.js",
-			  ]
-			: [
-					"https://gw.alipayobjects.com/os/lib/react/16.13.1/umd/react.production.min.js",
-					"https://gw.alipayobjects.com/os/lib/react-dom/16.13.1/umd/react-dom.production.min.js",
-			  ],
-	dynamicImport: {
-		loading: "@/components/PageLoading/index",
-	},
-
-	chunks: ["vendors", "umi"],
 	chainWebpack: function (config, { webpack }) {
 		config.merge({
 			optimization: {
@@ -111,6 +66,57 @@ export default defineConfig({
 			},
 		});
 	},
+	locale: {
+		// default zh-CN
+		default: "zh-CN",
+		// default true, when it is true, will use `navigator.language` overwrite default
+		antd: true,
+		baseNavigator: true,
+	},
+	externals: {
+		react: "window.React",
+		"react-dom": "window.ReactDOM",
+	},
+	// 引入被 external 库的 scripts
+	// 区分 development 和 production，使用不同的产物
+	scripts:
+		process.env.NODE_ENV === "development"
+			? [
+					"https://gw.alipayobjects.com/os/lib/react/16.13.1/umd/react.development.js",
+					"https://gw.alipayobjects.com/os/lib/react-dom/16.13.1/umd/react-dom.development.js",
+			  ]
+			: [
+					"https://gw.alipayobjects.com/os/lib/react/16.13.1/umd/react.production.min.js",
+					"https://gw.alipayobjects.com/os/lib/react-dom/16.13.1/umd/react-dom.production.min.js",
+			  ],
+	dynamicImport: {
+		loading: "@/components/PageLoading/index",
+	},
+	//
+	// chunks: ["vendors", "umi"],
+	// chainWebpack: function (config, { webpack }) {
+	// 	config.merge({
+	// 		optimization: {
+	// 			minimize: true,
+	// 			splitChunks: {
+	// 				chunks: "all",
+	// 				minSize: 30000,
+	// 				minChunks: 3,
+	// 				automaticNameDelimiter: ".",
+	// 				cacheGroups: {
+	// 					vendor: {
+	// 						name: "vendors",
+	// 						// @ts-ignore
+	// 						test({ resource }) {
+	// 							return /[\\/]node_modules[\\/]/.test(resource);
+	// 						},
+	// 						priority: 10,
+	// 					},
+	// 				},
+	// 			},
+	// 		},
+	// 	});
+	// },
 	// targets: {
 	// 	ie: 11,
 	// },
