@@ -108,9 +108,7 @@ const UserList: React.FC<{}> = () => {
 			)}
 			<AddOrUpdateRole
 				onCancel={() => {
-					() => {
-						setAddOrUpdateRoleVisible(false);
-					};
+					setAddOrUpdateRoleVisible(false);
 				}}
 				onOk={() => {
 					setAddOrUpdateRoleVisible(false);
