@@ -1,4 +1,4 @@
-import { Divider, DatePicker, Button, Form } from "antd";
+import { Divider, DatePicker } from "antd";
 import React, { useRef } from "react";
 import { PageContainer } from "@ant-design/pro-layout";
 import ProTable, { ActionType, ProColumns } from "@ant-design/pro-table";
@@ -9,51 +9,10 @@ import { useRequest } from "ahooks";
 import { getRoleAll } from "@/api/mods/role/getAllRole";
 import ButtonSubmit from "@/components/ButtonSubmit";
 import { postUserUpdateStatus } from "@/api/mods/user/updateStatus";
-import ProForm, { ModalForm, ProFormText, ProFormDateRangePicker, ProFormSelect } from "@ant-design/pro-form";
-import { PlusOutlined } from "@ant-design/icons";
 // import { TableListItem } from "./data.d";
 interface TableListItem {}
 
 const { Option } = Select;
-
-const MOdalForm = () => {
-	const [form] = Form.useForm();
-
-	return (
-		<span
-			style={{
-				display: "inline-block",
-			}}>
-			<ModalForm
-				style={{
-					width: "200px",
-				}}
-				form={form}
-				trigger={
-					<Button type="link">
-						<PlusOutlined />
-						新建表单
-					</Button>
-				}
-				onFinish={async (values) => {
-					console.log(values);
-					return true;
-				}}>
-				<ProFormSelect
-					options={[
-						{
-							value: "chapter",
-							label: "盖章后生效",
-						},
-					]}
-					width="xs"
-					name="useMode"
-					label="测试表单"
-				/>
-			</ModalForm>
-		</span>
-	);
-};
 
 const UserList: React.FC<{}> = () => {
 	const actionRef = useRef<ActionType>();
@@ -173,7 +132,6 @@ const UserList: React.FC<{}> = () => {
 					</ButtonSubmit>
 
 					<Divider type="vertical" />
-					<MOdalForm></MOdalForm>
 				</span>
 			),
 		},
