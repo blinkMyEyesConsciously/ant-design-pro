@@ -139,8 +139,6 @@ const UserList: React.FC<{}> = () => {
 
 	return (
 		<PageContainer>
-			<DatePicker />
-
 			<ProTable<TableListItem>
 				actionRef={actionRef}
 				rowKey="userNo"
